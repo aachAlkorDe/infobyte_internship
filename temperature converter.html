@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0e9e9;
+        }
+
+        /* Main container */
+        .container {
+            background: rgb(102, 140, 118);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+        }
+
+        /* Google Logo */
+        .logo {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        /* Input, Select & Button */
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result Box */
+        .result-box {
+            margin-top: 15px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #d6caca;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <img class="Converter" src="C:\Users\user\Downloads\conveter.webp">
+        <h2>Temperature Converter</h2>
+        <input type="number" id="temperature" placeholder="Enter temperature">
+        <select id="unit">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+
+        <!-- Result Box -->
+        <div class="result-box" id="result">Result will appear here</div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            let temp = parseFloat(document.getElementById("temperature").value);
+            let unit = document.getElementById("unit").value;
+            let resultText = "";
+
+            if (isNaN(temp)) {
+                resultText = "Please enter a valid number";
+            } else {
+                let celsius, fahrenheit, kelvin;
+                if (unit === "C") {
+                    celsius = temp;
+                    fahrenheit = (temp * 9/5) + 32;
+                    kelvin = temp + 273.15;
+                } else if (unit === "F") {
+                    celsius = (temp - 32) * 5/9;
+                    fahrenheit = temp;
+                    kelvin = celsius + 273.15;
+                } else {
+                    celsius = temp - 273.15;
+                    fahrenheit = (celsius * 9/5) + 32;
+                    kelvin = temp;
+                }
+
+                // Display results
+                resultText = `
+                    Celsius: ${celsius.toFixed(2)} °C<br>
+                    Fahrenheit: ${fahrenheit.toFixed(2)} °F<br>
+                    Kelvin: ${kelvin.toFixed(2)} K
+                `;
+            }
+
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
